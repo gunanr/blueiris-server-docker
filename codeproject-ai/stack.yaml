@@ -1,0 +1,35 @@
+---
+services:
+  codeproject-ai:
+    hostname: codeproject-ai
+    image: docker.io/codeproject/ai-server:cuda12_2-2.8.0
+    runtime: nvidia
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: "10G"
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: all
+      CPAI_MODULES: 'ObjectDetectionYOLOv8,ALPR'
+      CPAI_MESHOPTIONS_ENABLE: 'true'
+      CPAI_MESHOPTIONS_ENABLESTATUSBROADCAST: 'false'
+      CPAI_MESHOPTIONS_ENABLESTATUSMONITORING: 'true'
+      CPAI_MESHOPTIONS_ACCEPTFORWARDEDREQUESTS: 'true'
+      CPAI_MESHOPTIONS_ALLOWREQUESTFORWARDING: 'true'
+      CPAI_MESHOPTIONS_KNOWNMESHHOSTNAMES: '[ "k8s-nginx.k8s.lan" ]'
+    ports:
+      - "32168:32168"
+    volumes:
+      - codeproject_ai_config:/etc/codeproject/ai
+      - codeproject_ai_modules:/app/modules
+    networks:
+      - overlay
+    restart: always
+networks:
+  overlay: null
+volumes:
+  codeproject_ai_config:
+  codeproject_ai_modules:
+
