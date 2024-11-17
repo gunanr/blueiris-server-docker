@@ -18,6 +18,14 @@ services:
       CPAI_MESHOPTIONS_ACCEPTFORWARDEDREQUESTS: 'true'
       CPAI_MESHOPTIONS_ALLOWREQUESTFORWARDING: 'true'
       CPAI_MESHOPTIONS_KNOWNMESHHOSTNAMES: '[ "k8s-nginx.k8s.lan" ]'
+      Modules:ObjectDetectionYOLOv8:AutoStart: 'true'
+      Modules:ALPR:AutoStart: 'true'
+      Server:MeshOptions:Enable: 'true'
+      Server:MeshOptions:EnableStatusBroadcast: 'false'
+      Server:MeshOptions:EnableStatusMonitoring: 'true'
+      Server:MeshOptions:AllowRequestForwarding: 'true'
+      Server:MeshOptions:KnownMeshHostnames: '[ "k8s-nginx.k8s.lan" ]'
+      Server:ModuleOptions:InitialModules: 'ObjectDetectionYOLOv8; ALPR'
     ports:
       - "32168:32168"
     volumes:
