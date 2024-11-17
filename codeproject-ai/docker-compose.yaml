@@ -8,7 +8,7 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              count: all
+              count: 1
               capabilities: [gpu]
     environment:
       CPAI_MODULES: 'ObjectDetectionYOLOv8,ALPR'
