@@ -1,5 +1,6 @@
 services:
   codeproject-ai:
+    hostname: codeproject-ai
     image: docker.io/codeproject/ai-server:cuda12_2-2.8.0
     runtime: nvidia
     deploy:
